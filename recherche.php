@@ -6,14 +6,14 @@ if ($_POST) {
         require_once('connection.php');
         $label = strip_tags($_POST['label']);
 
-        $sql = 'SELECT * FROM `ref_prenoms` WHERE label=:label;';
+        $sql = 'SELECT * FROM `ref_prenoms` WHERE label LIKE :label'.'% ORDER BY label ASC;';
         $query = $db->prepare($sql);
 
         $query->bindValue('label', $label, PDO::PARAM_STR);
         $query->execute(); 
 
-        $person = $query->fetch();
-        var_dump($person);
+        $persons = $query->fetchAll();
+        var_dump($persons);
 
         require_once('close.php');
         
@@ -21,8 +21,8 @@ if ($_POST) {
 
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
