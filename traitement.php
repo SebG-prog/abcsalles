@@ -1,11 +1,35 @@
 <?php
-var_dump($_POST);
 if ($_POST) {
     if (isset($_POST['filename']) && !empty($_POST['filename'])) {
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . $_POST['filename'] . '.csv';
         $ressource = fopen($file, 'r');
+
+        $k=0; // For testing
         while($line = fgets($ressource)) {
-            var_dump($line);
+            if ($k >= 1) {
+                if ($k === 5) {
+                    die();
+                }
+                $label = trim(explode(";", $line)[1], '"');
+                // traitement mysql non fini...
+                
+                // require_once('connection.php');
+                // try {
+                //     $sql = 'SELECT * FROM `ref_prenoms` WHERE label=:label ;';
+                    
+                //     $query = $db->prepare($sql);
+                //     $query->bindValue('label', $label, PDO::PARAM_STR);
+                //     $query->execute();
+                    
+                //     $person = $query->fetch();
+                                       
+                // } catch (PDOException $e) {
+                //     echo 'Error: ' . $e->getMessage();
+                // }
+                
+                // require_once('close.php');
+            }
+            $k++;
         }
         fclose($ressource);
     }
