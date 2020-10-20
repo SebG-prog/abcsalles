@@ -2,20 +2,23 @@
 var_dump($_POST);
 if ($_POST) {
     if (isset($_POST['label']) && !empty($_POST['label'])) {
-        
-        require_once('connection.php');
-        $label = strip_tags($_POST['label']);
-
-        $sql = 'SELECT * FROM `ref_prenoms` WHERE label LIKE :label'.'% ORDER BY label ASC;';
-        $query = $db->prepare($sql);
-
-        $query->bindValue('label', $label, PDO::PARAM_STR);
-        $query->execute(); 
-
-        $persons = $query->fetchAll();
-        var_dump($persons);
-
-        require_once('close.php');
+        try { 
+            require_once('connection.php');
+            $label = strip_tags($_POST['label']);
+    
+            $sql = 'SELECT * FROM `ref_prenoms` WHERE label LIKE :label'.'% ORDER BY label ASC;';
+            $query = $db->prepare($sql);
+    
+            $query->bindValue('label', $label, PDO::PARAM_STR);
+            $query->execute(); 
+    
+            $persons = $query->fetchAll();
+            var_dump($persons);
+    
+            require_once('close.php');
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
         
     } else {
 
