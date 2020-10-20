@@ -2,7 +2,7 @@
 require_once('connection.php');
 
 
-require_once('close;php');
+require_once('close.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +22,7 @@ require_once('close;php');
                     <label for="name">Prenom: </label>
                     <input type="text" name="name" id="name" class="form-control" />
                 </div>
+                <button type="submit" class="btn btn-primary">Rechercher</button>
             </form>
             </section>
         </div>
